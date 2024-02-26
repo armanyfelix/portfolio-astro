@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-nav {
+    @apply btn btn-sm text-lg rounded-xl bg-opacity-0 border-opacity-0 hover:bg-opacity-30 hover:border-opacity-10 hover:shadow-xl active:bg-opacity-70 text-secondary;
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(115, 115, 115);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(100deg, rgba(243, 66, 19, 0.9) 0%, rgba(102, 97, 241, 0.9) 70%, rgba(124, 58, 237, 0.9) 100%);
+}

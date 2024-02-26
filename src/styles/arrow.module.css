@@ -1,0 +1,57 @@
+.arrow,
+.arrow:before {
+  position: absolute;
+  left: 50%;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  top: 105%;
+  margin: -20px 0 0 -20px;
+  transform: rotate(45deg);
+  border-left: none;
+  border-top: none;
+  border-right: 1px #fff solid;
+  border-bottom: 1px #fff solid;
+  /*webkit-background-clip: text;
+  color: transparent;
+  filter: invert(100%) grayscale(1);
+  mix-blend-mode: difference;
+  -webkit-filter: invert(100%) grayscale(1);*/
+}
+
+.arrow:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  margin: -10px 0 0 -10px;
+  border-left: none;
+  border-top: none;
+  border-right: 1px #fff solid;
+  border-bottom: 1px #fff solid;
+  /*-webkit-background-clip: text;
+  color: transparent;
+  filter: invert(100%) grayscale(1);
+  mix-blend-mode: difference;
+  -webkit-filter: invert(100%) grayscale(1);*/
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: arrow;
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-10px, -10px);
+  }
+}
+/* 
+.arrow,
+.invert {
+  transform: rotate(225deg);
+} */

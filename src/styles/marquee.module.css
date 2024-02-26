@@ -1,0 +1,23 @@
+.marquee {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size:x-large;
+    --tw-text-opacity: 1;
+    color: rgba(165, 180, 252, var(--tw-text-opacity));
+    font-weight: bold;
+    margin-top: 0.3rem;
+    font-family: monospace;
+    animation: marquee 15s linear infinite;
+}
+@keyframes marquee 
+{
+    0%
+    {
+        transform: translate(0, 0);
+    }
+    100%
+    {
+        transform: translate(-50%, 0);
+    }
+}

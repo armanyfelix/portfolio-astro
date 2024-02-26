@@ -1,0 +1,85 @@
+---
+import HamburgerSwap from '../svg/HamburgerSwap.astro'
+import themes from '../data/themes.json'
+
+const navItems = [
+  {
+    label: 'Proyects',
+    href: '#proyects',
+  },
+  {
+    label: 'About',
+    href: '#about',
+  },
+  {
+    label: 'Contact',
+    href: '#contact',
+  },
+]
+
+const menuOpen = false
+const themesOpen = false
+const topClasses = ''
+---
+
+<header
+  id='top'
+  class={`fixed right-1/2 top-0 z-40 w-full translate-x-1/2 px-3 pt-3 md:w-5/6 lg:w-4/6 xl:w-3/5`}
+>
+  <div
+    class={`${
+      menuOpen ? 'rounded-2xl py-8' : 'rounded-btn py-3'
+    } transform px-10 duration-500 ease-in-out md:py-1 ${topClasses}`}
+  >
+    <section class='flex w-full items-center justify-between'>
+      <a href='/'>
+        <h1 class='cursor-pointer text-3xl font-bold italic'>Armany</h1>
+      </a>
+      <div class='z-50 flex flex-col items-center justify-between sm:flex-row'>
+        <nav class='hidden w-full self-end sm:w-auto md:block'></nav>
+        <label class='swap swap-rotate inline-grid p-0 md:hidden'>
+          <input type='checkbox' />
+          <HamburgerSwap />
+        </label>
+      </div>
+    </section>
+    <nav class={`${menuOpen ? 'block' : 'hidden'} mx-4 mt-4`}>
+      <ul class='block md:flex md:items-center md:space-x-3'>
+        {
+          navItems.map((item, index) => (
+            <li>
+              <a href={item.href} class='btn btn-ghost w-full text-lg md:w-auto'>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <button class='btn btn-ghost w-full'>
+            <!-- {theme && themes.find((t) => t.name === theme)?.emoji} -->
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+{/* THEMES MENU */}
+<ul
+  class={`${
+    themesOpen ? 'fixed' : 'hidden'
+  } rounded-box right-1/2 top-[16.4rem] z-40 mt-7 max-h-[40vh] w-[93vw] translate-x-1/2 overflow-auto bg-accent-focus bg-opacity-30 p-3 shadow-lg backdrop-blur-md backdrop-brightness-75 md:right-1/4 md:top-[3.2rem] md:max-h-[70vh] md:w-auto md:translate-x-24`}
+>
+  {
+    themes.map((t: any) => (
+      <li>
+        <button data-set-theme={t.name} data-act-class='ACTIVECLASS'>
+          {t.emoji} {t.name}
+        </button>
+      </li>
+    ))
+  }
+</ul>
+{/* BACKDROPS */}
+<div class={`${menuOpen ? 'block' : 'hidden'} fixed inset-0 z-30 bg-black opacity-50`}>
+</div>
+<div class={`${themesOpen ? 'block' : 'hidden'} fixed inset-0 z-30`}></div>

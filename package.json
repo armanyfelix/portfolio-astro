@@ -1,0 +1,50 @@
+{
+  "name": "portfolio-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "types": "tsc --pretty --noEmit",
+    "lint": "astro lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx, astro}\"",
+    "test-all": "bun format && bun clint && bun types && bun build",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.4",
+    "@astrojs/tailwind": "^5.1.0",
+    "@heroicons/react": "^2.1.1",
+    "astro": "^4.1.1",
+    "daisyui": "^4.6.0",
+    "dotenv": "^16.3.1",
+    "nodemailer": "^6.9.8",
+    "p5": "^1.9.0",
+    "pocketbase": "^0.20.3",
+    "sharp": "^0.33.2",
+    "tailwindcss": "^3.4.1",
+    "theme-change": "^2.5.0",
+    "three": "^0.160.0",
+    "typescript": "^5.3.3",
+    "vanta": "^0.5.24"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/nodemailer": "^6.4.14",
+    "@types/p5": "^1.7.6",
+    "@types/three": "^0.160.0",
+    "@typescript-eslint/parser": "^6.18.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-astro": "^0.31.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^8.0.3",
+    "prettier": "^3.2.2",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11"
+  }
+}
