@@ -3,7 +3,7 @@ import HamburgerSwap from '../svg/HamburgerSwap.astro'
 import themes from '../data/themes.json'
 
 const navItems = [
-  {
+{
     label: 'Proyects',
     href: '#proyects',
   },
@@ -17,16 +17,37 @@ const navItems = [
   },
 ]
 
-const menuOpen = false
+const menuOpen = true
 const themesOpen = false
 const topClasses = ''
 ---
-
+<script>
+   let prevScrollpos = window.pageYOffset
+    window.onscroll = function () {
+      const currentScrollPos = window.pageYOffset
+      if (currentScrollPos === 0) {
+        document.getElementById("floating-bar")?.classList.add('ease-in');
+      } else {
+        document.getElementById("floating-bar")?.classList.add('bg-accent bg-opacity-30 shadow-xl backdrop-blur-md');
+      }
+      if (prevScrollpos > currentScrollPos) {
+        const position = (document.getElementById('top') as HTMLElement) || null
+        position.style.top = '0'
+        const transition = (document.getElementById('top') as HTMLElement) || null
+        transition.style.transition = 'top 0.6s'
+      } else if (!menuOpen) {
+        const position = (document.getElementById('top') as HTMLElement) || null
+        position.style.top = '-100px'
+      }
+      prevScrollpos = currentScrollPos
+    }
+</script>
 <header
   id='top'
   class={`fixed right-1/2 top-0 z-40 w-full translate-x-1/2 px-3 pt-3 md:w-5/6 lg:w-4/6 xl:w-3/5`}
 >
   <div
+    id="floating-bar"
     class={`${
       menuOpen ? 'rounded-2xl py-8' : 'rounded-btn py-3'
     } transform px-10 duration-500 ease-in-out md:py-1 ${topClasses}`}
@@ -48,7 +69,7 @@ const topClasses = ''
         {
           navItems.map((item, index) => (
             <li>
-              <a href={item.href} class='btn btn-ghost w-full text-lg md:w-auto'>
+              <a href={item.href} class='btn btn-sm btn-ghost w-full text-lg md:w-auto'>
                 {item.label}
               </a>
             </li>
@@ -56,6 +77,7 @@ const topClasses = ''
         }
         <li>
           <button class='btn btn-ghost w-full'>
+            cd
             <!-- {theme && themes.find((t) => t.name === theme)?.emoji} -->
           </button>
         </li>
