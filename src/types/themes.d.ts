@@ -1,4 +1,4 @@
 export interface Theme {
-  name: string
-  emoji: string
+  name: string;
+  emoji: string;
 }
