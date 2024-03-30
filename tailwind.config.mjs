@@ -13,7 +13,7 @@ export default {
       animation: {
         'fade-out': 'fade-out 0.5s forwards',
         'fade-in': 'fade-in 0.5s forwards',
-        spotlight: "spotlight 2s ease .75s 1 forwards",
+        spotlight: 'spotlight 2s ease .75s 1 forwards',
       },
       keyframes: {
         'fade-out': {
@@ -23,13 +23,13 @@ export default {
           to: { display: 'block', opacity: 100 },
         },
         spotlight: {
-          "0%": {
+          '0%': {
             opacity: 0,
-            transform: "translate(-72%, -62%) scale(0.5)",
+            transform: 'translate(-72%, -62%) scale(0.5)',
           },
-          "100%": {
+          '100%': {
             opacity: 1,
-            transform: "translate(-50%,-40%) scale(1)",
+            transform: 'translate(-50%,-40%) scale(1)',
           },
         },
       },
@@ -42,29 +42,6 @@ export default {
   ],
   daisyui: {
     themes: [
-      {
-        mytheme: {
-          primary: '#f34213',
-          secondary: '#525FE1',
-          accent: '#fce4de',
-          neutral: '#e0fbfc',
-          'base-100': '#000000',
-          info: '#81a4cd',
-          success: '#5c8001',
-          warning: '#ffbe0b',
-          error: '#af1b3f',
-          '--rounded-box': '2rem',
-          '--rounded-btn': '4.5rem',
-          '--rounded-badge': '1.9rem',
-          '--animation-btn': '0.25s',
-          '--animation-input': '0.2s',
-          '--btn-text-case': 'uppercase',
-          '--btn-focus-scale': '0.95',
-          '--border-btn': '1px',
-          '--tab-border': '1px',
-          '--tab-radius': '0.5rem',
-        },
-      },
       // {
       //   dark: {
       //     ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
@@ -72,8 +49,8 @@ export default {
       //     'text-neutral': '#ffffff',
       //   },
       // },
-      'dark',
       'light',
+      'dark',
       'cupcake',
       'bumblebee',
       'emerald',
@@ -101,6 +78,32 @@ export default {
       'night',
       'coffee',
       'winter',
+      'dim',
+      'nord',
+      'sunset',
+      {
+        mytheme: {
+          primary: '#f34213',
+          secondary: '#525FE1',
+          accent: '#fce4de',
+          neutral: '#e0fbfc',
+          'base-100': '#000000',
+          info: '#81a4cd',
+          success: '#5c8001',
+          warning: '#ffbe0b',
+          error: '#af1b3f',
+          '--rounded-box': '2rem',
+          '--rounded-btn': '4.5rem',
+          '--rounded-badge': '1.9rem',
+          '--animation-btn': '0.25s',
+          '--animation-input': '0.2s',
+          '--btn-text-case': 'uppercase',
+          '--btn-focus-scale': '0.95',
+          '--border-btn': '1px',
+          '--tab-border': '1px',
+          '--tab-radius': '0.5rem',
+        },
+      },
     ],
     // darkTheme: 'dark', // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default

@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { cn } from '../utils/cn'
-import { themeChange } from 'theme-change'
-import ThemeSelector from './ThemeSelector'
-import ThemeButton from './ThemeButton.astro'
 import {
   Button,
   Dialog,
@@ -12,6 +9,7 @@ import {
   Popover,
 } from 'react-aria-components'
 import themes from '../data/themes.json'
+import type { Theme } from '../types/themes'
 
 export const FloatingNav = ({
   navItems,
@@ -26,8 +24,8 @@ export const FloatingNav = ({
 }) => {
   const { scrollYProgress } = useScroll()
 
-  const [theme, setTheme] = useState('lol')
-  const [visible, setVisible] = useState<boolean>(false)
+  const [currentTheme, setCurrentTheme] = useState<string>('')
+  const [visible, setVisible] = useState<boolean>(true)
   const [background, setBackground] = useState<string>('')
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
@@ -47,9 +45,30 @@ export const FloatingNav = ({
     }
   })
 
+  const changeTheme = (theme: string) => {
+    localStorage.setItem('theme', theme)
+    setCurrentTheme(theme)
+    document.documentElement.setAttribute('data-theme', theme)
+  }
+
   useEffect(() => {
-    const ini = themeChange(false)
-    console.log('ini :>> ', ini)
+    const theme = localStorage.getItem('theme')
+    if (!theme) {
+      if (window.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+        setCurrentTheme('dark')
+      } else {
+        setCurrentTheme('light')
+      }
+    } else {
+      setCurrentTheme(theme)
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (event) => {
+        const newTheme = event.matches ? 'dark' : 'light'
+        changeTheme(newTheme)
+      })
   }, [])
 
   return (
@@ -86,7 +105,9 @@ export const FloatingNav = ({
           </a>
         ))}
         <DialogTrigger>
-          <Button className='btn btn-ghost btn-sm'>{theme}</Button>
+          <Button className='btn btn-ghost btn-sm'>
+            {themes.find((t) => t.name === currentTheme)?.emoji || '🎨'}
+          </Button>
           <Popover className='outline-none mt-5'>
             <OverlayArrow>
               <svg width={12} height={12} viewBox='0 0 12 12'>
@@ -98,11 +119,14 @@ export const FloatingNav = ({
                 className={`rounded-box menu menu-vertical flex-nowrap max-h-[40vh] overflow-auto gap-3 bg-accent-focus bg-opacity-30 p-3 shadow-lg backdrop-blur-md backdrop-brightness-75 md:max-h-[70vh] w-auto`}
               >
                 {themes.map((t: any) => (
-                  <li key={t.name} data-theme={t.name} className='rounded-btn antialiased'>
+                  <li
+                    key={t.name}
+                    data-theme={t.name}
+                    className='rounded-btn antialiased'
+                  >
                     <button
-                      className='flex items-center justify-between'
-                      data-set-theme={t.name}
-                      data-act-class='ACTIVECLASS'
+                      onClick={() => changeTheme(t.name)}
+                      className={`${currentTheme === t.name && 'ring ring-accent '} flex items-center justify-between`}
                     >
                       <div>
                         {t.emoji} {t.name}

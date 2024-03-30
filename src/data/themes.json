@@ -1,9 +1,5 @@
 [
   {
-     "name":"mytheme",
-     "emoji":"😎"
-  },
-  {
      "name":"light",
      "emoji":"☀️"
   },
@@ -118,5 +114,17 @@
   {
      "name":"winter",
      "emoji":"❄️"
+  },
+  {
+   "name":"dim",
+   "emoji":"🥟"
+  },
+  {
+   "name":"nord",
+   "emoji":"⛰️"
+  },
+  {
+   "name":"sunset",
+   "emoji":"🌅"
   }
 ]

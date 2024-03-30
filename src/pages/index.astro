@@ -5,13 +5,15 @@ import { TracingBeam } from '../components/TracingBeam'
 import { dummyContent } from '../data/dummyContent'
 import { twMerge } from 'tailwind-merge'
 import { Image } from 'astro:assets'
+import HeroParallax from '../components/HeroParallax'
 ---
 
 <Layout title='Welcome to Astro.'>
-  <main class='z-50 pt-5'>
+  <main class=' pt-5'>
     <TracingBeam className='px-5 pt-56' client:load>
-      <div class='max-w-2xl mx-auto  antialiased pt-4 relative'>
-        <Hero />
+      <div class='max-w-2xlmx-auto antialiased pt-4'>
+       <!-- <Hero /> -->
+        <HeroParallax client:load />
         {dummyContent.map((item: any, index: number) => (
           <div class="mb-10">
             <h2 class="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
