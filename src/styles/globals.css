@@ -8,6 +8,18 @@
   }
 }
 
+//:root {
+//  --my-color: #fff;
+//  /* or any other variables/style */
+//}
+//[data-theme='dark'] {
+//  --my-color: #000;
+//}
+//[data-theme='pink'] {
+ // --my-color: #ffabc8;
+//}
+
+
 * {
   scroll-behavior: smooth;
   box-sizing: border-box;
@@ -31,6 +43,7 @@ a {
   }
 }
 
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -50,4 +63,88 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(100deg, rgba(243, 66, 19, 0.9) 0%, rgba(102, 97, 241, 0.9) 70%, rgba(124, 58, 237, 0.9) 100%);
+}
+
+.react-aria-Popover {
+  --background-color: var(--overlay-background);
+
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 20px rgba(0 0 0 / 0.1);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-color);
+  outline: none;
+  max-width: 250px;
+  box-sizing: border-box;
+
+  .react-aria-OverlayArrow svg {
+    display: block;
+    fill: var(--background-color);
+    stroke: var(--border-color);
+    stroke-width: 1px;
+  }
+
+  &[data-placement=top] {
+    --origin: translateY(8px);
+
+    &:has(.react-aria-OverlayArrow) {
+      margin-bottom: 6px;
+    }
+  }
+
+  &[data-placement=bottom] {
+    --origin: translateY(-8px);
+
+    &:has(.react-aria-OverlayArrow) {
+      margin-top: 6px;
+    }
+
+    .react-aria-OverlayArrow svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-placement=right] {
+    --origin: translateX(-8px);
+
+    &:has(.react-aria-OverlayArrow) {
+      margin-left: 6px;
+    }
+
+    .react-aria-OverlayArrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-placement=left] {
+    --origin: translateX(8px);
+
+    &:has(.react-aria-OverlayArrow) {
+      margin-right: 6px;
+    }
+
+    .react-aria-OverlayArrow svg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &[data-entering] {
+    animation: popover-slide 200ms;
+  }
+
+  &[data-exiting] {
+    animation: popover-slide 200ms reverse ease-in;
+  }
+}
+
+@keyframes popover-slide {
+  from {
+    transform: var(--origin);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

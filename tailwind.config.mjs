@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const {
   default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+} = require('tailwindcss/lib/util/flattenColorPalette')
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
@@ -13,6 +13,7 @@ export default {
       animation: {
         'fade-out': 'fade-out 0.5s forwards',
         'fade-in': 'fade-in 0.5s forwards',
+        spotlight: "spotlight 2s ease .75s 1 forwards",
       },
       keyframes: {
         'fade-out': {
@@ -21,10 +22,24 @@ export default {
         'fade-in': {
           to: { display: 'block', opacity: 100 },
         },
+        spotlight: {
+          "0%": {
+            opacity: 0,
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('daisyui'), addVariablesForColors],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+    addVariablesForColors,
+  ],
   daisyui: {
     themes: [
       {
@@ -50,14 +65,14 @@ export default {
           '--tab-radius': '0.5rem',
         },
       },
-      {
-        dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
-          secondary: '#525FE1',
-          'text-neutral': '#ffffff',
-        },
-      },
-      // 'dark',
+      // {
+      //   dark: {
+      //     ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+      //     secondary: '#525FE1',
+      //     'text-neutral': '#ffffff',
+      //   },
+      // },
+      'dark',
       'light',
       'cupcake',
       'bumblebee',
@@ -99,12 +114,12 @@ export default {
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
 function addVariablesForColors({ addBase, theme }) {
-  let allColors = flattenColorPalette(theme("colors"));
+  let allColors = flattenColorPalette(theme('colors'))
   let newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
+  )
 
   addBase({
-    ":root": newVars,
-  });
+    ':root': newVars,
+  })
 }

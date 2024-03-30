@@ -1,47 +1,59 @@
-"use client";
-import React, { useState } from "react";
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import { cn } from '../utils/cn'
+import { themeChange } from 'theme-change'
+import ThemeSelector from './ThemeSelector'
+import ThemeButton from './ThemeButton.astro'
 import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import { cn } from "../utils/cn";
+  Button,
+  Dialog,
+  DialogTrigger,
+  OverlayArrow,
+  Popover,
+} from 'react-aria-components'
+import themes from '../data/themes.json'
 
 export const FloatingNav = ({
   navItems,
   className,
 }: {
   navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element | undefined;
-  }[];
-  className?: string;
+    name: string
+    link: string
+    icon?: JSX.Element | undefined
+  }[]
+  className?: string
 }) => {
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll()
 
-  const [visible, setVisible] = useState(false);
+  const [theme, setTheme] = useState('lol')
+  const [visible, setVisible] = useState<boolean>(false)
+  const [background, setBackground] = useState<string>('')
 
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
-    if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
-
+  useMotionValueEvent(scrollYProgress, 'change', (current) => {
+    if (typeof current === 'number') {
+      let direction = current! - scrollYProgress.getPrevious()!
       if (scrollYProgress.get() < 0.05) {
-        setVisible(false);
+        setVisible(true)
+        setBackground('bg-transparent')
       } else {
+        setBackground('dark:bg-base-300/60 backdrop-blur bg-white')
         if (direction < 0) {
-          setVisible(true);
+          setVisible(true)
         } else {
-          setVisible(false);
+          setVisible(false)
         }
       }
     }
-  });
+  })
+
+  useEffect(() => {
+    const ini = themeChange(false)
+    console.log('ini :>> ', ini)
+  }, [])
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode='wait'>
       <motion.div
         initial={{
           opacity: 1,
@@ -55,27 +67,60 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "flex max-w-fit  fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-2 pl-8 py-2  items-center justify-center space-x-4",
+          'flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] pr-4 pl-8 py-2 items-center justify-center space-x-4',
           className,
+          background
         )}
       >
+        <h1 className='text-primary'>
+          <slot />
+        </h1>
         {navItems.map((navItem: any, idx: number) => (
           <a
             key={`link=${idx}`}
             href={navItem.link}
-            className={cn(
-              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500",
-            )}
+            className={cn('relative items-center flex space-x-1')}
           >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm">{navItem.name}</span>
+            <span className='block sm:hidden'>{navItem.icon}</span>
+            <span className='hidden sm:block text-sm'>{navItem.name}</span>
           </a>
         ))}
-        <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-          <span>Login</span>
-          <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-        </button>
+        <DialogTrigger>
+          <Button className='btn btn-ghost btn-sm'>{theme}</Button>
+          <Popover className='outline-none mt-5'>
+            <OverlayArrow>
+              <svg width={12} height={12} viewBox='0 0 12 12'>
+                <path d='M0 0 L6 6 L12 0' />
+              </svg>
+            </OverlayArrow>
+            <Dialog className='outline-none'>
+              <ul
+                className={`rounded-box menu menu-vertical flex-nowrap max-h-[40vh] overflow-auto gap-3 bg-accent-focus bg-opacity-30 p-3 shadow-lg backdrop-blur-md backdrop-brightness-75 md:max-h-[70vh] w-auto`}
+              >
+                {themes.map((t: any) => (
+                  <li key={t.name} data-theme={t.name} className='rounded-btn antialiased'>
+                    <button
+                      className='flex items-center justify-between'
+                      data-set-theme={t.name}
+                      data-act-class='ACTIVECLASS'
+                    >
+                      <div>
+                        {t.emoji} {t.name}
+                      </div>
+                      <div className='inline-flex items-cente space-x-1'>
+                        <div className='w-3 h-3 bg-primary rounded-full' />
+                        <div className='w-3 h-3 bg-secondary rounded-full' />
+                        <div className='w-3 h-3 bg-accent rounded-full' />
+                        <div className='w-3 h-3 bg-neutral rounded-full' />
+                      </div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </Dialog>
+          </Popover>
+        </DialogTrigger>
       </motion.div>
     </AnimatePresence>
-  );
-};
+  )
+}

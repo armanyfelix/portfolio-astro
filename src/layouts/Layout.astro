@@ -2,6 +2,7 @@
 import { FloatingNav } from '../components/FloatingNavbar'
 import Footer from '../components/Footer.astro'
 import Navbar from '../components/Navbar.astro'
+import ThemeButton from '../components/ThemeButton.astro'
 import Background from './Background.astro'
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 
 const { title } = Astro.props
 const navItems = [
-{
+  {
     name: 'Proyects',
     link: '#proyects',
   },
@@ -26,8 +27,18 @@ const navItems = [
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang='en' data-theme="dark">
   <head>
+    <!-- <script is:inline>
+      // ☝️ This script prevent the FART effect.
+      if (localStorage.getItem('theme') === null) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else
+        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'))
+      // "theme" LocalStorage value is set by the package to remember user preference.
+      // The value is checked and applyed before rendering anything.
+    </script>
+    <script src='https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js'></script> -->
     <meta charset='UTF-8' />
     <meta name='description' content='Astro description' />
     <meta name='viewport' content='width=device-width' />
@@ -35,15 +46,15 @@ const navItems = [
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
-    <div class='relative z-50'>
-      <!-- <Navbar /> -->
-      <FloatingNav navItems={navItems} client:load />
-      <slot />
-      <Footer />
-    </div>
+  <body class='relative z-50 bg-base-100'>
+    <!-- <Navbar /> -->
+    <FloatingNav navItems={navItems} client:load >
+      <ThemeButton />
+    </FloatingNav>
+    <slot />
+    <Footer />
     <!-- <div class="z-0">
       <Background />
-    </div> -->
+    </div> --> 
   </body>
 </html>

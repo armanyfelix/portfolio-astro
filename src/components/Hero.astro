@@ -1,16 +1,34 @@
-<section class='h-screen w-full px-3'>
-  <div
-    class='mx-auto flex h-screen flex-col justify-center pb-10 text-center align-middle text-primary'
+---
+import { motion } from "framer-motion";
+import Spotlight from "./Spotlight.astro";
+import ThemeButton from "./ThemeButton.astro"
+---
+
+
+<section class='h-screen w-full'>
+  <Spotlight />
+  <motion.div
+    client:load
+    initial={{ opacity: 0.0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: 0.3,
+      duration: 0.8,
+      ease: 'easeInOut',
+    }}
+    className='relative w-full flex flex-col gap-4 items-center justify-center px-4'
   >
-    <h3
-      class='text-xl font-semibold italic sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl'
+    <div class='text-3xl md:text-7xl font-bold text-primary text-center'>
+       Full Stack Software Developer
+    </div>
+    <div class='font-extralight text-base md:text-4xl dark:text-neutral-200 py-4'>
+      Armany Felix
+    </div>
+    <button
+      class='bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2'
     >
-      Hey there, I{"'"}m Armany
-    </h3>
-    <h1
-      class='text-4xl font-bold subpixel-antialiased sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl'
-    >
-      Software Developer
-    </h1>
-  </div>
+      Debug now
+    </button>
+    <ThemeButton />
+  </motion.div>
 </section>
