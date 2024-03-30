@@ -1,7 +1,5 @@
-export const backgroundColor = (theme: string) => {
+export const getThemeColors = (theme: string | null) => {
   switch (theme) {
-    case "mytheme":
-      return "#000914";
     case "light":
       return "#bbbbbb";
     case "dark":
@@ -60,6 +58,8 @@ export const backgroundColor = (theme: string) => {
       return "#211720";
     case "winter":
       return "#bbbbbb";
+    case "mytheme":
+      return "#000914";
     default:
       return "#000914";
   }

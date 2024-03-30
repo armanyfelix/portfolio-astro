@@ -2,7 +2,7 @@
 import { FloatingNav } from '../components/FloatingNav'
 import Footer from '../components/Footer.astro'
 import Navbar from '../components/Navbar.astro'
-import Background from './Background.astro'
+import Background from '../components/Background.astro'
 
 interface Props {
   title: string
@@ -43,7 +43,7 @@ const navItems = [
     <Footer />
   </div>
     <div class="z-0">
-      <Background client:load />
+      <Background />
     </div>
   </body>
 </html>

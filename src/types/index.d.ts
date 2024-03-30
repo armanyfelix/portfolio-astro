@@ -17,8 +17,10 @@
 declare module VANTA {
   HALO: any;
   NET: any;
+  net: any;
   WAVES: any;
 }
+
 declare module "vanta/dist/vanta.halo.min";
 declare module "vanta/dist/vanta.net.min";
 declare module "vanta/dist/vanta.waves.min";
